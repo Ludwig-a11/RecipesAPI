@@ -87,7 +87,7 @@ const deleteUser = (req, res) =>{
 const getMyUser = (req, res) => {
   const id = req.user.id //?req.user contiene la informacion del Token desencriptado
   
-  usersControllers.getAllUsersById(id)
+  usersControllers.getUsersById(id)
   .then(data => {
     res.status(200).json(data)
   }) 
@@ -103,7 +103,7 @@ const patchMyUser = (req, res) => {
   const { firstName, lastName, phone, birthday, gender, country } = req.body
 
   usersControllers.updateUser(id, { firstName, lastName, phone, birthday, gender, country })
-  .then(data => {
+  .then(() => {
     res.status(200).json({message: `Your user was edited succesfully!`})
   })
   .catch(err => {

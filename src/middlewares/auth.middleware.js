@@ -4,7 +4,7 @@
 //* 3. Modificar el request y greagar req.user con la info desencriptado del Token 
 
 const { jwtSecret } = require('../config');
-const { getAllUsersById } = require('../users/users.controllers');
+const { getUsersById } = require('../users/users.controllers');
 
 const JwtStrategy = require('passport-jwt').Strategy; //? Passport maneja estrategias para las diferentes autenticaciones
 const ExtractJwt = require('passport-jwt').ExtractJwt; //? Extrae desde los headers de la peticion
@@ -21,7 +21,7 @@ module.exports = (passport) => {
     new JwtStrategy(options, async (decoded, done) => {
       //? done(error, decoded)
       try {
-        const response = await getAllUsersById(decoded.id)
+        const response = await getUsersById(decoded.id)
         if(!response){
           return done(null, false) //? false es porque no existe el usuario
         }
